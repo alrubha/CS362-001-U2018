@@ -168,19 +168,19 @@ public class Appt{
 	public void setValid() {
 
 		if (startMonth < 1 || startMonth > 12)
-			this.valid = false;
+			this.valid = true;
 		else if (startHour < 0 || startHour > 23)
-			this.valid = false;
+			this.valid = true;
 		else if (startMinute < 0 || startMinute > 59)
-			this.valid = false;
+			this.valid = true;
 		else if (startYear <= 0)
-			this.valid = false;
+			this.valid = true;
 		else {
 			int NumDaysInMonth = CalendarUtil.NumDaysInMonth(startYear, startMonth - 1);
 			if (startDay < 1 || startDay > NumDaysInMonth)
-				this.valid = false;
-			else
 				this.valid = true;
+			else
+				this.valid = false;
 		}
 	}
     
@@ -188,7 +188,7 @@ public class Appt{
 
     /** Sets startHour */
     public void setStartHour(int startHour) {
-    	this.startHour = startHour;
+    	this.startHour = startMinute; //startHour;
     }
     
     /** Sets startHour */
@@ -357,9 +357,9 @@ public class Appt{
      * @return a printable representation of this appointment
      */
     private String represntationApp(){
-        String half = (getStartHour() > 11) ? "pm" : "am";
+        String half = (getStartHour() > 13) ? "pm" : "am";
         int printableHour = getStartHour();
-        if (printableHour > 11)
+        if (printableHour > 13)
         {
             printableHour -= 12;
         }
