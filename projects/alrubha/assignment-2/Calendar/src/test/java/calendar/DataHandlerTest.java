@@ -84,4 +84,14 @@ public class DataHandlerTest{
 	
   }
 
+    @Test(timeout = 4000)
+  public void test05()  throws Throwable  {
+
+  	DataHandler dataHandler = new DataHandler();
+	Appt appt0 = new Appt(7,7,17,7,-2018,"appointment","Dentist", "xyz@gmail.com");	//invalid year
+	appt0.setValid();
+	assertFalse(dataHandler.saveAppt(appt0));
+	assertFalse(dataHandler.deleteAppt(appt0));
+  }
+
 }
