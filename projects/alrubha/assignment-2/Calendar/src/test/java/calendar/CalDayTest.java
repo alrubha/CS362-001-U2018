@@ -59,27 +59,65 @@ public class CalDayTest{
 	
   }
   
-    @Test(timeout = 4000)
+  @Test(timeout = 4000)
   public void test04()  throws Throwable  {
-
-	  GregorianCalendar cal = new GregorianCalendar(2018,10,20);
-	  Appt appt0 = new Appt(13, 7, 9, 14, 2018, "Birthday Party", "This is my birthday party", "xyz@gmail.com");
-	  Appt appt1 = new Appt(14, 9, 9, 14, 2018, "Birthday Party", "This is my birthday party", "xyz@gmail.com");
-	  CalDay calday = new CalDay(cal);
-	  calday.addAppt(appt0);
-	  calday.addAppt(appt1);
+      GregorianCalendar cal = new GregorianCalendar(2018, 7, 16);
+      CalDay calday = new CalDay(cal);
+      Appt appt0 = new Appt(7, 16, 2018, "party", "party all day", "xyz@gmail@gmail.com");
+      Appt appt1 = new Appt(0, 5, 7, 16, 2018, "birthday", "my party", "xyz@gmail@gmail@gmail.com");
+      Appt appt2 = new Appt(20, 10, 7, 16, 2018, "party", "night", "xyz@gmail.com");
+      calday.addAppt(appt0);
+      calday.addAppt(appt1);
+      calday.addAppt(appt2);
+      String test = calday.getFullInfomrationApp(calday);
 	  assertNotNull(calday.getFullInfomrationApp(calday));
 
   }
+
   
    @Test(timeout = 4000)
   public void test05()  throws Throwable  {
 
 	  CalDay cal = new CalDay();
-      String string0 = cal.toString();
-      String string1 = "\t --- 7/10/2018 --- \n --- -------- Appointments ------------ --- \n\n";
-      assertFalse(string0.equals(string1));
+      String test = cal.toString();
+	  assertNotNull(cal.toString());
 
+  }
+  
+     @Test(timeout = 4000)
+  public void test06()  throws Throwable  {
+	  
+    GregorianCalendar cal = new GregorianCalendar(2018, 7, 16);
+	CalDay calday = new CalDay(cal);
+	Appt appt0 = new Appt(-7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");	//invalid appt
+	appt0.setValid();
+	calday.addAppt(appt0);
+	assertNotNull(calday.toString());
+
+  }
+  
+   @Test(timeout = 4000)
+  public void test07()  throws Throwable  {
+
+    GregorianCalendar cal = new GregorianCalendar(2018, 7, 16);
+	CalDay calday = new CalDay(cal);
+	Appt appt0 = new Appt(7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");	//valid appt
+	appt0.setValid();
+	calday.addAppt(appt0);
+	assertNotNull(calday.toString());
+	 
+  }
+   @Test(timeout = 4000)
+  public void test08()  throws Throwable  {
+
+
+	 
+  }
+  
+  @Test(timeout = 4000)
+  public void test09()  throws Throwable  {
+
+	 
   }
   
 }

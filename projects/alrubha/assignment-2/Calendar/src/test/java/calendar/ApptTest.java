@@ -12,7 +12,6 @@ public class ApptTest  {
   public void test00()  throws Throwable  {
       Appt appt0 = new Appt(15, 30, 9, 14, 2018, "Birthday Party", "This is my birthday party", "xyz@gmail.com");
       appt0.setValid();
-	  appt0.toString();
       assertEquals(2, appt0.getRecurBy());
       assertFalse(appt0.isRecurring());
       assertEquals(0, appt0.getRecurIncrement());
@@ -40,7 +39,7 @@ public class ApptTest  {
 	assertEquals("appointment",appt1.getTitle());
 	assertEquals(recurDaysArr, appt1.getRecurDays());
 	assertTrue(!appt1.getValid());
-	assertFalse(appt1.isOn(5,8,2022));
+	assertFalse(appt1.isOn(5,8,2022));	//everything invalid
 
 
 }
@@ -69,12 +68,140 @@ public class ApptTest  {
 	  int[] recurDaysArr=null;
 	  appt0.setRecurrence( recurDaysArr, Appt.RECUR_BY_WEEKLY, 2, Appt.RECUR_NUMBER_FOREVER);
       appt0.setValid();
-	  assertTrue(appt0.isOn(9,14,2018));
+	  assertTrue(appt0.isOn(9,14,2018));	//valid
 	  assertTrue(appt0.hasTimeSet());
 	 
 	 	 
 }	 
 
+@Test(timeout = 4000)
+ public void test04()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");
+	appt0.setValid();
+	assertTrue(appt0.isOn(17,7,2018));	//valid
+		 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test05()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");
+	appt0.setValid();
+	assertFalse(appt0.isOn(18,7,2018));	//day invalid
+		 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test06()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");
+	appt0.setValid();
+	assertFalse(appt0.isOn(17,8,2018));	//month invalid
+		 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test07()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");
+	appt0.setValid();
+	assertFalse(appt0.isOn(17,7,2019));	//year invalid
+		 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test08()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(-7,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com"); //hours is too low
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test09()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,-7,17,7,2018,"appointment","Dentist", "xyz@gmail.com"); //minutes is too low
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test10()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,-17,7,2018,"appointment","Dentist", "xyz@gmail.com");	//invalid day
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test11()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,-7,2018,"appointment","Dentist", "xyz@gmail.com");	//invalid month
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test12()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,7,17,7,-2018,"appointment","Dentist", "xyz@gmail.com");	//invalid year
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	
+}	 
+
+
+@Test(timeout = 4000)
+ public void test13()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(24,7,17,7,2018,"appointment","Dentist", "xyz@gmail.com");	//hours is too high
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+}	 
+
+
+@Test(timeout = 4000)
+ public void test14()  throws Throwable  {
+	 
+	Appt appt0 = new Appt(7,61,17,7,2018,"appointment","Dentist", "xyz@gmail.com");	//minute is too high
+	appt0.setValid();
+	assertFalse(appt0.getValid());	 	 
+	 	 
+}	 
+
+  @Test(timeout = 4000)
+  public void test15()  throws Throwable  {
+      Appt appt0 = new Appt(7, 7, 17, 7, 2018, "appointment", "dentist", "xyz@gmail@gmail.com");
+      appt0.setValid();
+      String test = appt0.toString();
+      assertTrue(appt0.getValid());
+  }
+
+  @Test(timeout = 4000)
+  public void test16()  throws Throwable  {
+      Appt appt0 = new Appt(-7, -7, -17, -7, -2018, "appointment", "dentist", "xyz@gmail@gmail.com");
+      appt0.setValid();
+      String test = appt0.toString();
+      assertFalse(appt0.getValid());
+  }
 
 }//class
 
