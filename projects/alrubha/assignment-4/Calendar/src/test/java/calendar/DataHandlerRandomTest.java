@@ -108,13 +108,16 @@ public class DataHandlerRandomTest {
 											title,
 											description,
 											emailAddress);
-					 appt3.setXmlElement(null);
 					 appt.setValid();
 					 appt2.setValid();
 					 appt3.setValid();
 
 					 DataHandler data = new DataHandler("calendar_test.xml", autoSave);
-
+					 
+					 data.saveAppt(appt);
+					 data.saveAppt(appt2);
+					 data.saveAppt(appt3);
+					 
 					 //random start
 					 int firstDay=ValuesGenerator.getRandomIntBetween(random, 0, 32);
 					 int firstMonth=ValuesGenerator.getRandomIntBetween(random, 0, 13);
@@ -123,7 +126,7 @@ public class DataHandlerRandomTest {
 					 //random end
 					 int lastDay=ValuesGenerator.getRandomIntBetween(random, 0, 32);
 					 int lastMonth=ValuesGenerator.getRandomIntBetween(random, 0, 13);
-					 int lastYear=ValuesGenerator.getRandomIntBetween(random, 2020, 2021);
+					 int lastYear=ValuesGenerator.getRandomIntBetween(random, 2019, 2020);
 
 
 					GregorianCalendar firstday = new GregorianCalendar(firstYear, firstMonth, firstDay);
@@ -132,20 +135,19 @@ public class DataHandlerRandomTest {
 					LinkedList<CalDay> calDays = new LinkedList<CalDay>();
 					calDays = (LinkedList<CalDay>) data.getApptRange(firstday, lastday);
 
-					 data.saveAppt(appt);
-					 data.saveAppt(appt2);
-					 data.saveAppt(appt3);
+					data.deleteAppt(appt);
+					data.deleteAppt(appt2);
+					appt3.setXmlElement(null);
+					data.deleteAppt(appt3);
+
+					 //delete one out of every ten appointments
+ 					/*if(ValuesGenerator.getBoolean(.10f, random)) {
 
 					 data.deleteAppt(appt);
 					 data.deleteAppt(appt2);
 					 data.deleteAppt(appt3);
+					 }*/
 
-/*
-					 //delete one out of every ten appointments
- 					if(ValuesGenerator.getBoolean(.10f, random)) {
- 						data0.deleteAppt(appt0);
- 					}
-*/
 				 //show elapsed time
 				 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);
 					 if((iteration%10000)==0 && iteration!=0 )
